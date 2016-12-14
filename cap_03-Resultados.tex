@@ -1,12 +1,10 @@
 \chapter{Resultados}
 
-Este capítulo apresenta os resultados obtidos nos experimentos feitos para validação das técnicas utilizadas neste trabalho, bem como o resultado final da aplicação.
-
-É importante notar que apesar da limitação dos experimentos feitos para o rastreamento de pontos do rosto e para a estimação tridimensional foi possível obter dados suficientes para uma análise de precisão das técnicas.
+Este capítulo apresenta os resultados obtidos nos experimentos feitos para validação das técnicas utilizadas neste trabalho, bem como o resultado final da aplicação. Buscou-se repetir os experimentos várias vezes (mais do que 30 vezes) a fim de garantir valor estatístico para os resultados apresentados.
 
 \section{Calibração das Câmeras}
 
-A Tabela \ref{tab:params_intrisecos} mostra os parâmetros intrínsecos das câmeras utilizadas obtidos utilizando a ferramenta \textit{Camera Calibration Toolbox for Matlab}.
+A Tabela \ref{tab:params_intrisecos} mostra os parâmetros intrínsecos das câmeras utilizadas, obtidos a partir da ferramenta \textit{Camera Calibration Toolbox for Matlab}.
 
 \begin{table}[!htb]
 \centering
@@ -24,21 +22,22 @@ $alpha_c$ & 0 & 0 \\ \hline
 \label{tab:params_intrisecos}
 \end{table}
 
-Como pode ser observado os valores de $f_c(1)$ e $f_c(2)$, referentes a distância focal medida em pixeis horizontais e verticais, são bem próximos para ambas as câmeras. Com isso pode-se assumir que a câmera possui um pixel quadrado e assim tem uma distância focal $f = (f_c(1) + f_c(2))/2$, sendo $f$ o valor em pixeis.
+Como pode ser observado os valores de $f_c(1)$ e $f_c(2)$, referentes a distância focal medida em pixeis horizontais e verticais, são bem próximos para ambas as câmeras. Essa verificação valida a aproximação assumida, durante a modelagem, de que câmera possui um pixel quadrado. Portanto, a distância focal utilizada, para efeitos de cálculo, é dada por $f = (f_c(1) + f_c(2))/2$. Os valores são dados em pixeis.
 
-As câmeras utilizadas neste trabalho são do mesmo modelo e seu foco é ajustável. O foco das câmeras foi ajustado para ficar parecido, a partir de uma avaliação visual apenas. Todos estes fatores explicam os resultado similares obtidos para as duas câmeras.
+Os resultados similares obtidos para cada uma das câmeras não é ao acaso, visto que as duas câmeras utilizadas são da mesma marca e modelo. Além disso, ambas possuem foco ajustável, o ajuste em cada uma foi feito manualmente e por avaliação visual, de modo a capturar imagens nítidas.
 
-A partir destes dados é possível estimar a profundidade de um ponto alvo utilizando a Equação \ref{eq:3d_Zequation} e assim estimar o valor de $X$ em centímetros, pelas Equações \ref{eq:3d_realX1} e \ref{eq:3d_realX1}, assim como estimar o valor de $Y$ em centímetros, pelas Equações \ref{eq:3d_realY1} e \ref{eq:3d_realY2}.
+Os parâmetros calculados fornecem os elementos necessários para tornar possível a estimação da profundidade de um ponto alvo, a partir da Equação \ref{eq:3d_Zequation}. Assim, pode-se estimar o valor de $X$ em centímetros, pelas Equações \ref{eq:3d_realX1} e \ref{eq:3d_realX1}, bem como estimar o valor de $Y$ em centímetros, pelas Equações \ref{eq:3d_realY1} e \ref{eq:3d_realY2}.
 
 \section{Rastreamento de Pontos da Face}
 
-Os experimentos realizados nesta seção foram feitos com o objetivo de avaliar a precisão da detecção de pontos da face utilizando a SDK \textit{CSIRO Face Analysis}, bem como justificar o uso de técnicas de estimação tridimensional e filtragem digital.
+Os experimentos realizados nesta seção foram feitos com o objetivo de avaliar isoladamente a precisão da detecção de pontos da face utilizando a SDK \textit{CSIRO Face Analysis}, ou seja, as medidas são tomadas com os valores puros (em pixeis e não filtrados) obtidos pelo rastreamento. O objetivo desta análise é permitir a comparação com os resultados obtidos após filtragem e estimação de tridimensionalidade, bem como justificar o uso destas técnicas.
 
-Duas poses foram avaliadas, a Pose Neutra e a Pose Sorrindo, com isso a razão de distância avaliada foi a do \textbf{comprimento dos lábios}, já que é essa razão que varia entre as poses e que consequentemente, após a filtragem, se torna um dos pesos aplicados ao modelo final.
 
-Para ambas câmeras 1 e 2 foi obtida a média e o desvio padrão para essa razão de distância, em pixeis, a partir de vários valores de profundidade. A média e o desvio padrão foram calculados a partir do valores medidos em trinta imagens de uma face imóvel capturadas sucessivamente com intervalos de tempo menores que um segundo.
+Escolheu-se medir a razão de distância para o \textbf{comprimento dos lábios} em repetidas tomadas, para duas das poses disponíveis: a Pose Neutra e a Pose Sorrindo. Essa razão de distância, após filtragem, compõe o peso de mistura para a Pose Sorrindo na aplicação final e foi escolhida por ser a razão que apresenta maior amplitude de variação entre os extremos máximos e mínimos.
 
-A Tabela \ref{tab:exp-px-variando-dist-cam1} exibe os valores obtidos através da câmera 1. Enquanto a Figura \ref{fig:graf-cam1-dsv-dist} mostra um gráfico da variação do desvio padrão do comprimento dos lábios, para a Pose Neutra e a para Sorrindo, em relação a distância entre a câmera 1 e o alvo.
+Para ambas câmeras 1 e 2 obteve-se a média e o desvio padrão, em pixeis, para essa razão de distância. Esses dados foram adquiridos a medida que o usuário se posicionava a diferentes distâncias em relação à montagem de captura, variando, assim, os valores de profundidade. Os dados de média e desvio padrão foram obtidos a partir de medições em trinta imagens de uma face imóvel, capturadas sucessivamente com intervalos de tempo menores que um segundo.
+
+A Tabela \ref{tab:exp-px-variando-dist-cam1} exibe os valores obtidos através da câmera 1 enquanto a Figura \ref{fig:graf-cam1-dsv-dist} mostra um gráfico da variação do desvio padrão do comprimento dos lábios, para a Pose Neutra e a para Sorrindo, em relação a distância entre a câmera 1 e o alvo.
 
 
 \begin{table}[!htb]
@@ -68,7 +67,7 @@ A Tabela \ref{tab:exp-px-variando-dist-cam1} exibe os valores obtidos através d
 \label{fig:graf-cam1-dsv-dist}
 \end{figure}
 
-A Tabela \ref{tab:exp-px-variando-dist-cam2} exibe os valores obtidos através da câmera 2. Enquanto a Figura \ref{fig:graf-cam2-dsv-dist} mostra um gráfico da variação do desvio padrão do comprimento dos lábios, para a Pose Neutra e a para Sorrindo, em relação a distância entre a câmera 2 e o alvo.
+A Tabela \ref{tab:exp-px-variando-dist-cam2} exibe os valores obtidos através da câmera 2 e a Figura \ref{fig:graf-cam2-dsv-dist} mostra um gráfico da variação do desvio padrão do comprimento dos lábios, para a Pose Neutra e a para Sorrindo, em relação a distância entre a câmera 2 e o alvo.
 
 \begin{table}[!htb]
 \centering
@@ -97,23 +96,23 @@ A Tabela \ref{tab:exp-px-variando-dist-cam2} exibe os valores obtidos através d
 \label{fig:graf-cam2-dsv-dist}
 \end{figure}
 
-Os gráficos exibidos na Figura \ref{fig:graf-cam1-dsv-dist} e na Figura \ref{fig:graf-cam2-dsv-dist} mostram que existe uma instabilidade no rastreamento de pontos da face, que apesar de pequena pode afetar o modelo final. Essa variação dos pontos acontecem em altas frequências, visto que as imagens foram capturadas sucessivamente em pequenos intervalos de tempo, assim essa instabilidade pode ser tratada com a utilização de filtragem digital. 
+O desvio padrão é importante pois funciona como um indicador da precisão do processo de medida. Fosse o processo regido por uma distribuição puramente Gaussiana, o desvio padrão do processo indicaria que aproximadamente 66\% das medidas serão observadas dentro de uma distância igual ao desvio padrão da média do processo, que é aceito como o valor mais provável para o valor verdadeiro sendo medido.  Os gráficos exibidos na Figura \ref{fig:graf-cam1-dsv-dist} e na Figura \ref{fig:graf-cam2-dsv-dist} mostram que existe incerteza no rastreamento de pontos da face e que a incerteza apresenta um comportamento que varia com a distância. Apesar de o desvio padrão ter sido pequeno quando comparado às dimensões de cada uma das das imagens capturadas, a existência dessa imprecisão pode afetar a qualidade da aplicação final. Além disso, outra análise interessante é que, como as imagens onde o rastreamento foi aplicado foram tomadas em intervalos de tempo muito curtos, e, ainda assim, houve variação nas medidas realizadas, diz-se que essas variações constituem um sinal de erro que deve possuir componentes de elevada frequência. Isto é, o ruído presente no processo de medida deve possuir componentes rápidas o suficiente para que seja capaz de influenciar medidas tomadas em instantes de tempo muito próximos uns dos outros. Essa observação motiva o uso de filtragem digital com o objetivo de cortar tais altas frequências.
 
-Outro comportamento exibido pelos gráficos é o de que o desvio padrão é quase sempre maior quando a razão de distância é medida na Pose Sorrindo do que quando ela é medida na Pose Neutra, ou seja, o rastreamento geralmente é mais estável quando feito em uma face sem expressões.
+Outro comportamento exibido pelos gráficos é o de que o desvio padrão é quase sempre maior quando a razão de distância é medida na Pose Sorrindo, do que quando ela é medida na Pose Neutra, ou seja, o rastreamento geralmente é mais preciso quando tomado em uma face sem expressões.  Este resultado pode ser um reflexo do erro de truncamento introduzido pela escolha de apenas algumas das configurações encontradas pela análise PCA e que, aparentemente, as componentes escolhidas privilegiam configurações neutras.
 
-Como observado o desvio padrão em geral diminui com o aumento da distância, porém esse acontecimento pode ser atribuído ao fato de que, como a razão de distância esta avaliada em pixeis, quanto maior a distância menor o valor da razão de distância.
+Outra observação que pode ser tirada é que o desvio padrão em geral diminui com o aumento da distância. Esse acontecimento pode ser atribuído ao fato de que, como neste experimento as medidas são avaliadas em pixeis, quanto maior a distância do usuário a câmera menor o valor da razão de distância.
 
-Observando as tabelas é possível reparar na diminuição drástica da média a medida que o valor de profundidade aumenta, de forma que o valor obtido do comprimento dos lábios a uma distância de 80cm é quase a metade do valor a 40cm. 
+Finalmente, observando as tabelas é possível reparar a diminuição drástica da média das medidas conforme o valor de profundidade aumenta: vê-se que o valor obtido para o comprimento dos lábios a uma distância de 80cm é quase a metade do valor obtido a 40cm.  Essa mudança brusca impossibilita uma boa determinação das distâncias mínimas e máximas, necessárias para a boa calibração de uma razão de distância, uma vez que estes parâmetros mudam com uma variação de profundidade, mesmo se o alvo estiver na mesma pose.
 
-Essa mudança brusca impossibilita uma boa calibração para as razões de distância, visto que a razão de distância, e consequentemente o modelo final, pode mudar com uma variação de profundidade, mesmo se o alvo estiver na mesma pose. Para isso é usada a estimação tridimensional, com ela é possível manter uma mesma razão de distância, caso a pose seja a mesma, não importa a profundidade, não alterando assim o modelo final.
+Estas duas últimas observações motivam o uso de uma técnica de medida que produza valores invariantes a distância que o usuário se encontra do sistema de captura. Esta técnica deve produzir sempre uma mesma razão de distância para uma mesma pose, independentemente da proximidade do usuário nas imagens de entrada.
 
-\section{Estimação do Tridimensional}
+\section{Estimação de Tridimensionalidade	}
 
 O objetivo dos experimentos nessa seção é avaliar a precisão da técnica de estimação tridimensional. Deve-se notar que uma precisão na estimação do $X$ e do $Y$ no sistema de coordenadas do mundo só é possível caso haja precisão na estimação do $Z$, como pode ser observado nas Equações \ref{eq:3d_realX1}, \ref{eq:3d_realX2}, \ref{eq:3d_realY1} e \ref{eq:3d_realY2}.
 
-Como nos experimentos da seção anterior, em que foi avaliada a precisão do rastreamento de pontos da face, a razão de distância analisada foi a referente ao comprimento dos lábios. Foram utilizadas as mesmas imagens, porém agora essa razão de distância foi estimada em centímetros, ou seja os pontos foram estimados no sistema de coordenadas do mundo.
+Como nos experimentos da seção anterior, a razão de distância analisada foi a referente ao comprimento dos lábios. Foram utilizadas as mesmas imagens capturadas no experimento anterior, porém desta vez as medidas foram tomadas após o par de imagens ter sido combinado com os parâmetros intrínsecos da câmera para produzir medidas em centímetros, ou seja, os pontos foram estimados no sistema de coordenadas do mundo.
 
-A Tabela \ref{tab:exp-px-variando-dist-3d} exibe os valores estimados em centímetros. Enquanto a Figura \ref{fig:graf-3d-dsv-dist} e a Figura \ref{fig:graf-3d-media-dist} mostram um gráfico da variação do desvio padrão e da média, respectivamente, do comprimento dos lábios, para a Pose Neutra e a para Sorrindo, em relação a distância entre as câmeras e o alvo.
+A Tabela \ref{tab:exp-px-variando-dist-3d} exibe os valores estimados em centímetros para a média e o desvio padrão do comprimento dos lábios para as poses Neutra e Sorrindo. Já a Figura \ref{fig:graf-3d-dsv-dist} e a Figura \ref{fig:graf-3d-media-dist} mostram gráficos para estes valores a medida que o usuário se afasta do sistema de captura.
 
 
 \begin{table}[!htb]
@@ -143,7 +142,7 @@ A Tabela \ref{tab:exp-px-variando-dist-3d} exibe os valores estimados em centím
 \label{fig:graf-3d-dsv-dist}
 \end{figure}
 
-O gráfico exibido na Figura \ref{fig:graf-3d-dsv-dist} mostra o desvio padrão do valor em centímetros da razão de distância, ele pode ser diretamente relacionado com a instabilidade do rastreamento de pontos. Essa instabilidade é exibida na Figura \ref{fig:graf-cam1-dsv-dist} e na Figura \ref{fig:graf-cam2-dsv-dist}. 
+O gráfico exibido na Figura \ref{fig:graf-3d-dsv-dist} mostra como se comporta o desvio padrão a medida que o usuário se distancia do sistema de captura. O comportamento é similar ao observado nas Figuras \ref{fig:graf-cam1-dsv-dist} e \ref{fig:graf-cam2-dsv-dist}, revelando a característica estocástica do processo de medida adotado. A diferença entre as Figuras  \ref{fig:graf-3d-dsv-dist}, \ref{fig:graf-cam1-dsv-dist} e \ref{fig:graf-cam2-dsv-dist} é que a primeira apresenta os resultado quando as medidas são tomadas no sistema de coordenadas estimadas do mundo enquanto as últimas apresentam resultados quando medidas são tomadas diretamente nos planos das câmeras. Vê-se que a estimação de profundidade não altera este comportamento do sistema de medida.
 
 \begin{figure}[!htpb]
 \centering
@@ -152,13 +151,13 @@ O gráfico exibido na Figura \ref{fig:graf-3d-dsv-dist} mostra o desvio padrão 
 \label{fig:graf-3d-media-dist}
 \end{figure}
 
-A precisão da estimação tridimensional pode ser verificada ao se avaliar a variação da média em relação a distância. Esses dados são exibidos na Figura \ref{fig:graf-3d-media-dist}, nota-se que a média se mantém suficientemente constante, principalmente nos intervalos entre 50cm e 65cm. Com isso pode-se concluir que mesmo que aconteça uma variação da distância do alvo em relação as câmeras, a razão de distância se manterá estável, garantindo estabilidade para o modelo final.
+A precisão da estimação tridimensional pode ser verificada ao se avaliar a variação da média em relação a distância. Esses dados são exibidos na Figura \ref{fig:graf-3d-media-dist}, nota-se que a média se mantém aproximadamente constante, principalmente nos intervalos entre 50cm e 65cm. Com isso pode-se concluir que mesmo que aconteça uma variação da distância do alvo em relação as câmeras, a razão de distância se manterá estável, garantindo estabilidade para o modelo final.
 
 \section{Filtros}
 
-Neste experimentos foram gerados gráficos de sequências para os pesos de mistura de 3 das poses utilizadas. Cada gráfico mostra medidas de pesos de mistura para uma das poses, com um curva para os valor não-filtrado e curvas para alguns dos filtros projetados.  As sequências foram obtidas em um vídeo gravado com o objetivo de movimentar especificamente a pose sendo testada. Os gráficos foram gerados selecionando-se parte das sequências gravadas.
+Nestes experimentos foram gerados gráficos para as sequências dos pesos de mistura com e sem filtragem de três das poses utilizadas. Cada gráfico mostra medidas de pesos de mistura para uma das poses, com um curva para os valor não-filtrado e curvas para saídas de alguns dos filtros projetados.  As sequências foram obtidas em um vídeo gravado com o objetivo de movimentar especificamente a pose sendo testada. Os gráficos foram gerados selecionando-se manualmente parte das sequências gravadas que produziram comportamento interessante para comparação.
 
-A Figuras \ref{fig:filter-left-eye}, \ref{fig:filter-open-mouth} e \ref{fig:filter-smile} demonstram a atuação dos filtros sobre a variação do peso de mistura para as poses Olho Esquerdo, Boca Aberta e Sorriso.
+A Figuras \ref{fig:filter-left-eye}, \ref{fig:filter-open-mouth} e \ref{fig:filter-smile} mostram a atuação dos filtros sobre a variação do peso de mistura para as poses Olho Esquerdo, Boca Aberta e Sorriso respectivamente. Nestes gráficos, mostra-se sempre a saída não filtrada, a saída filtrada com filtro de média móvel de Hanning e a saída filtrada com filtro de projeto com janela de Hamming para algumas frequências de corte. Os filtros com projeto em janela tem todos comprimento 16.
 
 \begin{figure}[!htb]
 \centering
@@ -169,31 +168,29 @@ A Figuras \ref{fig:filter-left-eye}, \ref{fig:filter-open-mouth} e \ref{fig:filt
 
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=0.8\textwidth]{figs/filter-result-left-eye.pdf} 
+\includegraphics[width=1.0\textwidth]{figs/filter-result-left-eye.pdf} 
 \caption{Peso de mistura para a Pose Boca Aberta}
 \label{fig:filter-open-mouth}
 \end{figure}
 
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=0.8\textwidth]{figs/filter-result-smile-2.pdf} 
+\includegraphics[width=1.0\textwidth]{figs/filter-result-smile.pdf} 
 \caption{Peso de mistura para a Pose Sorriso}
 \label{fig:filter-smile}
 \end{figure}
 
-Como visto nas Figuras \ref{fig:graf-cam1-dsv-dist} e \ref{fig:graf-cam2-dsv-dist} o rastreamento em si não é totalmente preciso nem quando o rosto está imóvel, logo em um vídeo longo onde ocorre movimentação e variação de luminosidade é esperado que o sinal sem filtragem seja mais ruidoso, como é mostrados no gráficos. 
+Como visto nas Figuras \ref{fig:graf-cam1-dsv-dist} e \ref{fig:graf-cam2-dsv-dist} dos experimentos anteriores, o rastreamento em si apresenta instabilidades mesmo quando o rosto está imóvel. Portanto, pode-se esperar que em um vídeo longo onde ocorre movimentação e variação de luminosidade o sinal sem filtragem seja ainda mais instável. Esse comportamento é visto nas oscilações rápidas observadas nos gráficos em \ref{fig:filter-left-eye}, \ref{fig:filter-open-mouth} e \ref{fig:filter-smile}. 
 
-A filtragem suaviza o sinal e consequentemente melhora a animação final. Vários tipos de filtro foram analisados e seus desempenhos foram variados.
+A filtragem suaviza o sinal e consequentemente remove oscilações indesejáveis na animação final. Vários tipos de filtro foram analisados e seus desempenhos foram variados. Como pode ser observado, os filtros projetados pela técnica de janela foram compridos de mais e introduzem atrasos no sinal de saída em relação ao de entrada sinal e, apesar de eles serem mais poderosos em filtrar altas frequências, esse tipo de filtro acaba prejudicando a performance da animação em tempo real. 
 
-Como pode ser observado os filtros projetados pela técnica de janela acabam atrasando atrasando o sinal e, apesar de eles serem eficientes em filtrar altas frequências, esses tipos de filtro acabam prejudicando a performance da animação em tempo real.
-
-Por outro lado o filtro de hanning conseguiu seguir o sinal original e manter uma boa filtragem das altas frequências, isso acontece pois este tipo de filtro possui muito menos parâmetros que os outros projetados. Para este trabalho, onde um dos objetivos é a animação em tempo real, esse tipo filtro apresentou o melhor resultado.
+Por outro lado o filtro de média móvel de Hanning segue adequadamente o sinal original e mantem uma boa atenuação das altas frequências. Esse filtro introduz um menor atraso em seguir o sinal de entrada, pois possui muito menos coeficientes que os outros filtros projetados. Para este trabalho, onde um dos objetivos é a animação em tempo real, o filtro de Hanning apresentou o melhor resultado. Poderia ter sido experimentado um projeto em janela utilizando-se menos coeficientes, mas como o filtro de média móvel mostrou bons resultados, decidiu-se por não prosseguir com a experimentação de mais filtros.
 
 \section{Mistura de Poses}
 
-Neste experimento foi avaliada somente a técnica de mistura de poses, ou seja, foi renderizado um modelo final sem a influência do rastreamento de pontos da face. Para isso foram atribuídos manualmente os valores de peso.
+Neste experimento trabalhou-se apenas com a técnica de Mistura de Poses para compor um modelo final sem a influência do rastreamento de pontos da face. Isto foi feito para ser possível avaliar esta técnica isoladamente. Para isso foram atribuídos manualmente os valores dos pesos de mistura.
 
-Alguns exemplos de modelos finais de poses intermediárias renderizados com sucesso podem ser vistos na Figura \ref{fig:blend-shapes-inter-simple-shapes}.
+Alguns exemplos de modelos finais mostrando poses intermediárias renderizadas com sucesso podem ser vistos na Figura \ref{fig:blend-shapes-inter-simple-shapes}.
 
 \begin{figure}[!htb]
   \centering
@@ -219,19 +216,38 @@ Alguns exemplos de modelos finais de poses intermediárias renderizados com suce
   \label{fig:blend-shapes-inter-simple-shapes}
 \end{figure}
 
-Como pode ser observado nos modelos finais exibidos a técnica de mistura de poses teve ótimos resultados. 
+Como pode ser observado nos modelos exibidos, a técnica de mistura de poses teve ótimos resultados. Os resultados mostram que a implementação utilizando  indexação de VBOs e que a ordenação dos vetores foi adequada. Não fosse esse o caso, seria possível observar falhas no modelo, como  buracos ou presença de deformações irregulares.
 
-A indexação dos VBOs e a ordenação dos vetores foi constante, pois se não sendo este o caso seria possível observar algumas falhas óbvias no modelo, como alguns buracos aparecendo ou deformações irregulares se formando.
+Pode-se notar que a presença de cada pose chave no modelo final está bem relacionada com os pesos aplicados. Verifica-se que a aplicação da Equação \ref{eq:blendshapes} permite criar, a partir de poucas poses pré-definidas, uma quantidade enorme de poses intermediárias significativamente diferentes.
 
-As significância de cada pose pré-definida no modelo final está bem relacionada com os pesos aplicados e essa relação pode ser claramente visualizada nas figuras, ou seja, ao aplicar a Equação \ref{eq:blendshapes} é possível criar, a partir de poucas poses pré-definidas, uma quantidade enorme de poses intermediárias significativamente diferentes.
-
-Com esses resultados pode se concluir que caso ocorra uma boa estimação das razões de distância, a partir de um rastreamento de pontos, estimação tridimensional e filtragem, o modelo final correto será renderizado com sucesso.
+Com esses resultados nota-se que se o programa for capaz 
+de gerar pesos de mistura que adequadamente correspondam às expressões apresentadas pelo usuário, a técnica de mistura de poses será capaz de compor um modelo final com expressões variadas.
 
 \section{Sistema em Funcionamento}
 
-A avaliação do sistema em funcionamento, similarmente ao que foi feito para a mistura de poses, é qualitativa. Quadros comparativos entre a imagem de entrada e o modelo final foram exibidos na \ref{fig:sist-func}, de forma a observar a qualidade da animação, avaliando o impacto do movimento dos pontos utilizados como referências para as razões de distância no modelo final. Para isso é necessária uma boa calibração dos valores de distância mínima e máxima para cada razão de distância. Esta avaliação é porém embasada nos resultados dos experimento obtidos para cada etapa.
+Para que o sistema funcione adequadamente é necessária uma etapa de calibração das distâncias mínimas e máximas observadas em cada uma das razões de distância. Isso é feito de forma manual ao executar o programa, pois toma-se nota de valores impressos em tela sobre as distâncias entre os pontos tomadas no quadro atual. Por exemplo, pode-se sorrir e, então, anotar o valor medido para o sorriso que é impresso na tela. Os valores anotados são, posteriormente, inseridos no código para serem utilizados para cálculo das razões de distância. Os valores utilizados para a sequência de resultados obtidos a seguir são apresentados na Tabela \ref{tab:distance-ratio-coeffs}.
 
-O sistema em funcionamento pode ser observado na Figura \ref{fig:sist-func} em que o modelo final segue os movimentos do rosto alvo a partir das razões de distância consideradas.
+\begin{table}
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+pose & distância mínima (cm) & distância mínima (cm) \\ \hline
+sorriso & 5.9 & 7.9 \\ \hline
+sobrancelha esquerda & 2.4 & 3.7 \\ \hline
+sobrancelha direita & 2.4 & 3.6 \\ \hline
+olho esquerdo & 0.3 & 0.6 \\ \hline
+olho direito & 0.3 & 0.6 \\ \hline
+boca aberta & 0.3 & 4.3 \\ \hline
+\end{tabular}
+\caption{Valores de distância mínima e distância máxima definidos, para cada pose, após calibração.}
+\label{tab:distance-ratio-coeffs}
+\end{table}
+
+Utiliza-se os coeficientes acima para rodar a aplicação sobre vídeos de entrada e guarda-se alguns quadros dos vídeos e da saída.
+As Figuras \ref{fig:sist-func}, \ref{fig:sist-func-2}, \ref{fig:sist-func-3} e \ref{fig:sist-func-4} mostram lado a lado quadros de entrada e os resultados da transferência de expressão para o avatar. Nas Figuras de \ref{fig:sist-func} a \ref{fig:sist-func-3} os quadros de entrada foram escolhidos de forma a mostrar expressões variadas que podem ser capturadas pela técnica proposta. A figura \ref{fig:sist-func-4} mostra uma sequência de três quadros consecutivos tirada enquanto o usuário conversava com a câmera. Notar que a boca do avatar abre seguindo o movimento do usuário.
+
+Os resultados mostram que o acoplamento entre o rastreamento de pontos do rosto com os pesos de mistura por meio de razões de distâncias se deu de forma satisfatória. Há poses para mistura que não foram utilizadas, mas todas as poses para as quais se definiu uma razão de distância foram adequadamente transferidas do usuário para o avatar. O avatar é capaz de sorrir, abrir a boca, movimentar as sobrancelhas e piscar segundo o movimento do usuário. 
+
 
 \begin{figure}[!htb]
   \centering
@@ -246,10 +262,97 @@ O sistema em funcionamento pode ser observado na Figura \ref{fig:sist-func} em q
   \begin{subfigure}[]
   {\label{fig:inter4}\includegraphics[width=0.35\textwidth]{./figs/TG-resultado-par-5-img-2.png}}
   \end{subfigure}
+  
+    \begin{subfigure}[]
+  {\label{fig:inter3}\includegraphics[width=0.35\textwidth]{./figs/i_0230.png}}
+  \end{subfigure} 
+  \begin{subfigure}[]
+  {\label{fig:inter4}\includegraphics[width=0.35\textwidth]{./figs/o_0250.png}}
+  \end{subfigure}
 
-  \caption{Imagens que demonstram o sistema em funcionamento.}
+  \caption{Imagens que demonstram o sistema em funcionamento.  Em relação ao movimento da boca, as Figuras \ref{fig:sist-func}(d) e \ref{fig:sist-func}(f) deixam claro que há dois movimentos sendo rastreados independentemente: abrir a boca verticalmente como no ato de bocejar e abri-la horizontalmente como no ato de sorrir.}
 
   \label{fig:sist-func}
 \end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \begin{subfigure}[]{\label{fig:inter1}\includegraphics[width=0.35\textwidth]{./figs/i_0330.png}}
+  \end{subfigure}   
+  \begin{subfigure}[]{\label{fig:inter2}\includegraphics[width=0.35\textwidth]{./figs/o_0370.png}}
+  \end{subfigure}
+  
+  \begin{subfigure}[]
+  {\label{fig:inter3}\includegraphics[width=0.35\textwidth]{./figs/i_0350.png}}
+  \end{subfigure} 
+  \begin{subfigure}[]
+  {\label{fig:inter4}\includegraphics[width=0.35\textwidth]{./figs/o_0380.png}}
+  \end{subfigure}
+  
+    \begin{subfigure}[]
+  {\label{fig:inter3}\includegraphics[width=0.35\textwidth]{./figs/i_0550.png}}
+  \end{subfigure} 
+  \begin{subfigure}[]
+  {\label{fig:inter4}\includegraphics[width=0.35\textwidth]{./figs/o_0640.png}}
+  \end{subfigure}
+  
+   \begin{subfigure}[]
+  {\label{fig:inter3}\includegraphics[width=0.35\textwidth]{./figs/i_0780.png}}
+  \end{subfigure} 
+  \begin{subfigure}[]
+  {\label{fig:inter4}\includegraphics[width=0.35\textwidth]{./figs/o_0850.png}}
+  \end{subfigure}
+
+  \caption{Imagens que demonstram o sistema em funcionamento. Compare a Figura \ref{fig:sist-func}(d) com a \ref{fig:sist-func-2}(d) para notar que o avatar está sorrindo com a boca fechada nesta e aberta naquela. } 
+
+  \label{fig:sist-func-2}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \begin{subfigure}[]{\label{fig:inter1}\includegraphics[width=0.35\textwidth]{./figs/i_0400.png}}
+  \end{subfigure}   
+  \begin{subfigure}[]{\label{fig:inter2}\includegraphics[width=0.35\textwidth]{./figs/o_0490.png}}
+  \end{subfigure}
+  
+  \begin{subfigure}[]
+  {\label{fig:inter3}\includegraphics[width=0.35\textwidth]{./figs/i_0140.png}}
+  \end{subfigure}
+  \begin{subfigure}[]
+  {\label{fig:inter4}\includegraphics[width=0.35\textwidth]{./figs/o_0160.png}}
+  \end{subfigure}
+
+  \caption{Imagens que demonstram o sistema em funcionamento. Novamente, o avatar pode sorrir com a boca fechada ou com a boca aberta, podendo o olho estar fechado e aberto. As poses são combinadas independentemente.}
+
+  \label{fig:sist-func-3}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \begin{subfigure}[]{\label{fig:inter1}\includegraphics[width=0.35\textwidth]{./figs/i_0250.png}}
+  \end{subfigure}   
+  \begin{subfigure}[]{\label{fig:inter2}\includegraphics[width=0.35\textwidth]{./figs/o_0320.png}} 
+  \end{subfigure}  
+  
+  \begin{subfigure}[]
+  {\label{fig:inter3}\includegraphics[width=0.35\textwidth]{./figs/i_0260.png}}
+  \end{subfigure} 
+  \begin{subfigure}[]
+  {\label{fig:inter4}\includegraphics[width=0.35\textwidth]{./figs/o_0330.png}}
+  \end{subfigure}
+  
+    \begin{subfigure}[]
+  {\label{fig:inter4}\includegraphics[width=0.35\textwidth]{./figs/i_0270.png}}
+  \end{subfigure}
+    \begin{subfigure}[]
+  {\label{fig:inter4}\includegraphics[width=0.35\textwidth]{./figs/o_0340.png}}
+  \end{subfigure}
+
+  \caption{Imagens que demonstram o sistema em funcionamento \textit{frame} a \textit{frame}. A sequência mostra a abertura gradual da boca enquanto o personagem conversa com as câmeras.}
+
+  \label{fig:sist-func-4}
+\end{figure}
+
+
 
 
