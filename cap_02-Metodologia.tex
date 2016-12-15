@@ -43,9 +43,12 @@ calibração do sistema.}
 
 A estrutura utilizada neste trabalho para captura de vídeo consiste na fixação
 de duas \textit{webcams} comuns posicionadas paralelamente sobre uma plataforma
-de madeira. A Figura \ref{fig:setupCameras} mostra a fixação do par de câmeras
-utilizado, sendo `$b = 18cm$'  a distância entre os centros das câmeras e `$a =
-2 cm$' a distância entre o centro de captura da câmera e a aresta do suporte.
+de madeira. Vale notar que essa é uma estrutura extremamente simples e barata para um 
+sistema de animação computacional, custando em volta de cem reais. Esse é um dos fatores que 
+torna o sistema proposto neste trabalho, em um sistema de baixo custo. A Figura 
+\ref{fig:setupCameras} mostra a fixação do 
+par de câmeras utilizado, sendo `$b = 18cm$'  a distância entre os centros das câmeras e 
+`$a=2 cm$' a distância entre o centro de captura da câmera e a aresta do suporte.
 Este parâmetro $a$ deve ser conhecido pois durante os experimentos é necessário
 medir a distância do alvo ao centro das câmeras e isso é mais facilmente feito
 tomando-se a distância do alvo ao suporte e utilizando o parâmetro $a$ para
@@ -437,23 +440,23 @@ alguns dos filtros projetados pela técnica de corte com janela de Hanning.
 \centering
 \begin{tabular}{|l|l|l|l|}\hline
 k \/$w_c$ & $0.1\pi$ & $0.1\pi$ & $0.1\pi$ \\ \hline
-  0	& 0.0025	&   -0.0000	&		0.0030 \\		
- 1	& 0.0057	&   -0.0052	&	   -0.0050 \\	
- 2	& 0.0147	&    0.0000	&	    0.0067 \\	
- 3	& 0.0315	&    0.0232	&	   -0.0000 \\	
- 4	& 0.0555	&   -0.0000	&	   -0.0252 \\	
- 5	& 0.0834	&   -0.0761	&	    0.0721 \\	
- 6	& 0.1099	&    0.0000	&	   -0.1306 \\	
- 7	& 0.1289	&    0.3077	&	    0.1801 \\	
- 8	& 0.1358	&    0.5009	&	    0.7979 \\	
- 9	& 0.1289	&    0.3077	&	    0.1801 \\	
-10	& 0.1099	&    0.0000	&	   -0.1306 \\	
-11	& 0.0834	&   -0.0761	&	    0.0721 \\	
-12	& 0.0555	&   -0.0000	&	   -0.0252 \\	
-13	& 0.0315	&    0.0232	&	   -0.0000 \\	
-14	& 0.0147	&    0.0000	&	    0.0067 \\	
-15	& 0.0057	&   -0.0052	&	   -0.0050 \\	
-16	& 0.0025	&   -0.0000	&	    0.0030 \\
+  0	& 0,0025	&   -0,0000	&		0,0030 \\		
+ 1	& 0,0057	&   -0,0052	&	   -0,0050 \\	
+ 2	& 0,0147	&    0,0000	&	    0,0067 \\	
+ 3	& 0,0315	&    0,0232	&	   -0,0000 \\	
+ 4	& 0,0555	&   -0,0000	&	   -0,0252 \\	
+ 5	& 0,0834	&   -0,0761	&	    0,0721 \\	
+ 6	& 0,1099	&    0,0000	&	   -0,1306 \\	
+ 7	& 0,1289	&    0,3077	&	    0,1801 \\	
+ 8	& 0,1358	&    0,5009	&	    0,7979 \\	
+ 9	& 0,1289	&    0,3077	&	    0,1801 \\	
+10	& 0,1099	&    0,0000	&	   -0,1306 \\	
+11	& 0,0834	&   -0,0761	&	    0,0721 \\	
+12	& 0,0555	&   -0,0000	&	   -0,0252 \\	
+13	& 0,0315	&    0,0232	&	   -0,0000 \\	
+14	& 0,0147	&    0,0000	&	    0,0067 \\	
+15	& 0,0057	&   -0,0052	&	   -0,0050 \\	
+16	& 0,0025	&   -0,0000	&	    0,0030 \\
 \hline
 \end{tabular}
 
@@ -640,7 +643,14 @@ entre uma foto e outra. Há ainda o problema da iluminação que pode variar
 ligeiramente a medida que as horas de experimentos passam. Tendo isso em mente,
 o objetivo dos experimentos é que eles forneçam uma ideia das limitações da
 técnica e não que sejam uma metodologia precisa de estimação dos erros
-envolvidos.
+envolvidos. 
+
+Porém, é importante notar que para um funcionamento adequado do sistema de 
+animação sem marcadores proposto, não é necessário um ambiente controlado e nem uma 
+iluminação especial, logo esses fatores também não são essenciais para a formulação
+de um \textit{setup} experimental. Também não é necessário um computador potente, vale notar
+que os dois computadores utilizados nos experimentos deste trabalho foram \textit{notebooks} com as seguintes especificações: .
+   
 
 A Figura \ref{fig:exp-montagem} mostra a montagem utilizada nos experimentos que
 se seguem. Antes de cada medida, os passos a seguir são tomados como uma
