@@ -2,7 +2,8 @@
 
 Este capítulo descreve a sequência de passos utilizada para extrair movimento
 facial a partir de um par de imagens e transferi-lo para um modelo
-tridimensional. O objetivo da aplicação proposta é a transferência de movimento
+tridimensional. O objetivo do sistema de animação computacional de baixo 
+custo proposto é a transferência de movimento
 da imagem para o modelo. Portanto a qualidade do resultado final deve ser
 analisada através da comparação entre o movimento esperado e aquele efetivamente
 gerado. Este trabalho não propõe uma metodologia formal para a avaliação da
@@ -134,7 +135,7 @@ mostrados na  Figura \ref{fig:tracked-facial-points}.
 \includegraphics[width=0.4\linewidth, height=5cm]{figs/nick-marked-queixo.png} &
 \includegraphics[width=0.4\linewidth, height=5cm]{figs/nick-marked.png}
 \end{tabular}
-\caption{Pontos retornados pelo rastreamento facial a a numeração associada a cada ponto. A imagem sobre a qual se realiza o rastreamento foi retirado de \cite{nicolas}.}
+\caption{Pontos retornados pelo rastreamento facial e a numeração associada a cada ponto. A imagem sobre a qual se realiza o rastreamento (retirado de \cite{nicolas}).}
 \label{fig:tracked-facial-points}
 \end{figure*}
 
@@ -301,7 +302,7 @@ quadro j e seja $d_i^j = |\bm{p_1^i} - \bm{p_2^i}|$ a distância medida entre
 esse par de pontos nesse quadro, o peso da i-ésima pose é dado por:
 
 \begin{equation}
-	w_i^j = \frac{|d_i^j - d_i^{\text{min}}|}{|d_i^{\text{max}} - d^{\text{min}}|}
+	w_i^j = \frac{|d_i^j - d_i^{\text{min}}|}{|d_i^{\text{max}} - d_i^{\text{min}}|}
    \label{eq:pesos1}
 \end{equation}
 
@@ -315,7 +316,7 @@ deve acontecer, ou seja, uma diminuição da razão de distância significa um
 aumento do peso da pose associada, a equação de peso é dada por: 
 
 \begin{equation}
-	w_i^j = 1 - \frac{|d_i^j - d_i^{\text{min}}|}{|d_i^{\text{max}} - d^{\text{min}}|}
+	w_i^j = 1 - \frac{|d_i^j - d_i^{\text{min}}|}{|d_i^{\text{max}} - d_i^{\text{min}}|}
     \label{eq:pesos2}
 \end{equation}
 
@@ -556,7 +557,7 @@ utilizadas neste trabalho são mostradas na Figura
   \begin{subfigure}[Pose Boca Aberta]{\label{fig:pose_o_mouth}\includegraphics[width=0.4\textwidth]{./figs/open-mouth.png}}
   \end{subfigure}
 
-  \caption{Exemplos de modelos usados como poses pré definidas.}
+  \caption{Exemplos de modelos usados como poses pré-definidas.}
 
   \label{fig:blend-shapes-base-simple-shapes1}
 \end{figure}
@@ -578,7 +579,7 @@ utilizadas neste trabalho são mostradas na Figura
   \begin{subfigure}[Pose Nariz Aberto]{\label{fig:pose_nose}\includegraphics[width=0.4\textwidth]{./figs/nose.png}}
   \end{subfigure}
 
-  \caption{Exemplos de modelos usados como poses pré definidas.}
+  \caption{Exemplos de modelos usados como poses pré-definidas.}
 
   \label{fig:blend-shapes-base-simple-shapes2}
 \end{figure}
@@ -666,10 +667,10 @@ configuração inicial:
 
 \end{enumerate}
 
-\begin{figure}
+\begin{figure}[!htp]
 \centering
 \includegraphics[width=0.8\linewidth]{figs/setupExperimento-comentado.png}
-\caption{Montagem utilizada para captura repetitiva de fotos do mesmo alvo em várias posições controladas.}
+\caption{\textit{Setup} experimental utilizado para captura repetitiva de fotos do mesmo alvo em várias posições controladas.}
 \label{fig:exp-montagem}
 \end{figure}
 
@@ -755,4 +756,8 @@ examina o sorrir, apenas o comprimento horizontal dos lábios é medido).
 A razão obtida é entrada independentemente em cada um dos filtros projetados. A
 razão medida e a saída de cada um dos filtros é guardada em arquivo para análise
 posterior.
+
+O próximo capítulo apresenta os resultados obtidos neste trabalho, para cada etapa 
+intermediária e para o sistema de animação completo em funcionamento.
+
 

@@ -1,13 +1,14 @@
 \chapter{Fundamentos\label{chap:FundamentacaoMatematica}}
 
 % Resumo opcional. Comentar se não usar.
-Esta seção introduz os conceitos por trás das técnicas utilizadas em nossa
-aplicação. O objetivo deste capítulo é introduzir o necessário da teoria das
-técnicas utilizadas neste trabalho, para que se entenda as propriedades dos
-resultados obtidos. A aplicação consiste do encadeamento de diversas técnicas
-oriundas dos domínios de Visão Computacional, Geometria Computacional e
-Filtragem Digital. Como frequentemente acontece, as técnicas de Visão
-Computacional muitas vezes empregam conceitos de Aprendizado de Máquina. 
+Esta seção introduz os conceitos por trás das técnicas utilizadas no sistema
+de animação computacional proposto neste trabalho. O objetivo deste capítulo 
+é introduzir o necessário da teoria das técnicas utilizadas, 
+para que se entenda as propriedades dosresultados obtidos. A aplicação 
+consiste do encadeamento de diversas técnicas oriundas dos domínios de 
+Visão Computacional, Geometria Computacional e Filtragem Digital. Como frequentemente
+acontece, as técnicas de Visão Computacional muitas vezes empregam conceitos de 
+Aprendizado de Máquina. 
 
 
 \section{Definições Básicas}
@@ -125,7 +126,7 @@ alguns detalhes do RLMS serão apresentados.
 
 Essa seção especifica o modelo paramétrico utilizado pelo RLMS. O Modelo de
 Distribuição de Pontos, do inglês \nomenclature{PDM}{\textit{Point Distribution
-Model}} \textit{Point Distribution Model} (PDM) propõe que o objeto a ser
+Model}} \textit{Point Distribution Model} (PDM), propõe que o objeto a ser
 entendido deve ser caracterizado como um conjunto de pontos chaves
 bidimensionais no domínio da imagem. O PDM modela linearmente variações de forma
 não-rígidas e as compõe com uma transformação rígida global, colocando o i-ésimo
@@ -180,7 +181,7 @@ para aproximar os valores $\mathbf{v}_i$ em torno de um ponto $\mathbf{v}_i^c$:
 
 A técnica de Análise de Componentes Principais, do inglês
 \nomenclature{PCA}{\textit{Principal Components Analysis}} \textit{Principal
-Components Analysis} (PCA) é comumente utilizada para reduzir a dimensionalidade
+Components Analysis} (PCA), é comumente utilizada para reduzir a dimensionalidade
 de um conjunto de vetores de características. Um vetor de características é
 simplesmente um vetor cujas componentes representam características de um
 objeto.  A entrada para a técnica consiste de um conjunto $\mathcal{D}$ de $N$
@@ -790,14 +791,14 @@ triângulos, como mostrado na Figura \ref{fig:mapeamento}. As equações de $Y$ 
 mostradas a seguir.
 
 \begin{equation}
-Y = (u'_y/f_1) Z
+Y = (u_y/f_1) Z
 \label{eq:3d_realY1}
 \end{equation}      
 
 ou
 
 \begin{equation}
-Y = (u_y/f_2) Z
+Y = (u'_y/f_2) Z
 \label{eq:3d_realY2}
 \end{equation}  
 
@@ -1146,7 +1147,7 @@ para cada vértice que compõe a malha do modelo
 \caption{Três modelos a serem misturados pela técnica de \textit{Blend Shapes}
 (retirado de \cite{tutorial-supremo-on-blend-shapes}). Respectivamente da
 esquerda para a direita, os modelos representam a pose neutra, a expressão de
-felicidade e de raiva. Note a diferença na forma dos lábios e nas sobrancelhas.}
+felicidade e de raiva. Nota-se a diferença na forma dos lábios e nas sobrancelhas.}
 
 \label{fig:blend-shapes-example-input} 
 \end{figure*}
@@ -1434,7 +1435,7 @@ seja, uma equação da forma:
 Filtros com a forma acima são desejáveis pois são mais facilmente
 implementáveis.
 
-\subsection{Projeto de Filtro Passa Baixa pela Técnica de Janela}
+\subsection{Projeto de Filtro Passa-Baixa pela Técnica de Janela}
 
 O princípio por trás dessa técnica é se aproximar do filtro passa-baixas ideal,
 mostrado na Figura \ref{fig:filtro-passa-baixas-ideal-freq}. A Equação
@@ -1449,7 +1450,7 @@ produziria tal filtro ideal.
   \end{subfigure}
 
   \caption{Em (a) é observada a resposta ao impulso em frequência ideal de um
-    filtro passa baixas. A frequência de corte projetada é $\omega_c=\frac{\pi}{3}$
+    filtro passa-baixas. A frequência de corte projetada é $\omega_c=\frac{\pi}{3}$
     rad/segundos. Em (b) são observados alguns pontos de $h(n)$. Na realidade a sequência é infinita para ambos os lados do eixo.  }
 
   \label{fig:filtro-passa-baixas-ideal-freq}
