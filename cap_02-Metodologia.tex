@@ -43,8 +43,11 @@ calibração do sistema.}
 
 A estrutura utilizada neste trabalho para captura de vídeo consiste na fixação
 de duas \textit{webcams} comuns posicionadas paralelamente sobre uma plataforma
-de madeira. Vale notar que essa é uma estrutura extremamente simples e barata para um 
-sistema de animação computacional, custando em volta de cem reais. Esse é um dos fatores que 
+de madeira. As câmeras utilizadas são ambas do modelo \textit{Phillips Webcam Easy 
+SPC530}, com uma resolução de 1.3MP. Vale notar que essa é uma estrutura extremamente 
+simples e barata para um 
+sistema de animação computacional, custando, na data atual de publicação deste trabalho, em 
+volta de cem reais. Esse é um dos fatores que 
 torna o sistema proposto neste trabalho um sistema de baixo custo. A Figura 
 \ref{fig:setupCameras} mostra a fixação do 
 par de câmeras utilizado, sendo `$b = 18cm$'  a distância entre os centros das câmeras e 
@@ -138,7 +141,8 @@ mostrados na  Figura \ref{fig:tracked-facial-points}.
 \includegraphics[width=0.4\linewidth, height=5cm]{figs/nick-marked-queixo.png} &
 \includegraphics[width=0.4\linewidth, height=5cm]{figs/nick-marked.png}
 \end{tabular}
-\caption{Pontos retornados pelo rastreamento facial e a numeração associada a cada ponto. A imagem sobre a qual se realiza o rastreamento (retirado de \cite{nicolas}).}
+\caption{Pontos retornados pelo rastreamento facial e a numeração associada a cada ponto. A 
+imagem sobre a qual se realiza o rastreamento foi retirada de \cite{nicolas}.}
 \label{fig:tracked-facial-points}
 \end{figure*}
 
@@ -419,7 +423,7 @@ cursores de seleção permitem selecionar o filtro utilizado para cada um dos
 pesos de mistura.
 
 Os gráficos na Figura \ref{fig:filter-design-frequency-response} mostram a
-resposta em frequência de cada filtro. O Filtro de Média Móvel de Hamming é
+resposta em frequência de cada filtro. O Filtro de Média Móvel de Hanning é
 descrito na Equação \ref{eq:filter-hanning}.
 
 \begin{align}
@@ -434,7 +438,7 @@ Os filtros projetados com a técnica da janela seguem a seguinte equação:
 \end{equation}
 
 Para L=16, a Tabela \ref{tab:fir-filters-coefs} mostra os coeficientes para
-alguns dos filtros projetados pela técnica de corte com janela de Hanning.
+alguns dos filtros projetados pela técnica de corte com janela de Hamming.
 
 \begin{table}
 \centering
@@ -461,7 +465,7 @@ k \/$w_c$ & $0.1\pi$ & $0.1\pi$ & $0.1\pi$ \\ \hline
 \end{tabular}
 
 \caption{Coeficientes para os filtros projetados com técnica de janela,
-utilizando a janela de Hanning.}
+utilizando a janela de Hamming.}
 
 \label{tab:fir-filters-coefs}
 \end{table}
@@ -472,10 +476,10 @@ utilizando a janela de Hanning.}
 \begin{tabular}{cc}
 \includegraphics[width=0.45\linewidth]{figs/filter-response-hanningFilter.png} &
 \includegraphics[width=0.45\linewidth]{figs/filter-response-wc_0_1pi.png}\\
-(a) Filtro de Média móvel de Hamming & (b) Projeto com janela de Hanning $w_c=\frac{\pi}{10}$ \\
+(a) Filtro de Média móvel de Hanning & (b) Projeto com janela de Hamming $w_c=\frac{\pi}{10}$ \\
 \includegraphics[width=0.45\linewidth]{figs/filter-response-wc_0_5pi.png} &
 \includegraphics[width=0.45\linewidth]{figs/filter-response-wc_0_8pi.png} \\
-(c) Projeto com janela de Hanning $w_c=\frac{\pi}{2}$ & (d) Projeto com janela de Hanning $w_c=\frac{4\pi}{5}$ \\
+(c) Projeto com janela de Hamming $w_c=\frac{\pi}{2}$ & (d) Projeto com janela de Hamming $w_c=\frac{4\pi}{5}$ \\
 \end{tabular}
 
 \caption{Magnitude e fase da resposta em frequência para alguns dos filtros
@@ -647,15 +651,21 @@ envolvidos.
 
 Tendo em vista que o controle do ambiente e da iluminação não são necessários para o
 funcionamento adequado do sistema de animação proposto, não especificamos 
-restrições em relação a estes fatores para os experimentos. Também é possível utilizar 
-um computador que possua hardware acessível, vale notar que os computadores utilizados 
-nos experimentos deste trabalho são \textit{notebooks} com as seguintes especificações: 
+restrições em relação a estes fatores para os experimentos. Em relação ao hardware 
+utilizado, o sistema foi instalado e testado em dois computadores. As configurações das 
+máquinas utilizadas são apresentadas a seguir: 
 
-Computador 1: Intel® Core™ i7-2630QM CPU @ 2.00GHz × 8; 6GB RAM; GeForce GT 540M/PCIe/SSE2;
+\begin{itemize}
+\item Computador 1: Intel® Core™ i7-2630QM CPU @ 2.00GHz × 8; 6GB RAM; GeForce GT 540M/PCIe/SSE2;
 Ubuntu 14.04; OpenGL 3.3.
+\item Computador 2: Intel® Core™ i7-4510U CPU @ 2.00GHz × 4; 16GB RAM; Sem placa de vídeo
+dedicada; Ubuntu 16.04; OpenGL 3.3.
+\end{itemize}
 
-Computador 2: Intel® Core™ i7-4510U CPU @ 2.00GHz × 4; 16GB RAM; Sem placa de vídeo 
-dedicada; Ubuntu 16.04; OpenGL 3.3.  
+Vale notar que as máquinas utilizadas apresentam configurações comumente encontradas na data 
+atual de publicação deste trabalho, mostrando com que o sistema não necessita de máquinas
+com um hardware muito sofisticado para ter um bom desempenho. Isso contribui para que o 
+custo total do sistema de animação seja menor.
 
 A Figura \ref{fig:exp-montagem} mostra a montagem utilizada nos experimentos que
 se seguem. Antes de cada medida, os passos a seguir são tomados como uma
@@ -685,7 +695,7 @@ configuração inicial:
 \begin{figure}[!htp]
 \centering
 \includegraphics[width=0.8\linewidth]{figs/setupExperimento-comentado-fundo-branco.png}
-\caption{\textit{Setup} experimental utilizado para captura repetitiva de fotos do mesmo alvo em várias posições controladas.}
+\caption{Montagem experimental utilizada para captura repetitiva de fotos do mesmo alvo em várias posições controladas.}
 \label{fig:exp-montagem}
 \end{figure}
 
