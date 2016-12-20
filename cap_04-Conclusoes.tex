@@ -2,39 +2,48 @@
 
 \label{CapConclusoes}
 
-Desenvolveu-se uma aplicação que permite transferir certos movimentos faciais
-para um avatar computacional a partir de uma sequência de imagens capturadas por
-um par de câmeras. A técnica chave utilizada foi conectar características de um
-conjunto de pontos obtidos de um processo de rastreamento visual com os pesos de
-mistura da técnica de Mistura de Poses, permitindo gerar expressões variadas
-para o avatar a partir da combinação de um conjunto reduzido de expressões
-chave. 
+Desenvolveu-se um sistema que permite transferir um conjunto de movimentos
+faciais para um avatar computacional a partir de uma sequência de imagens
+capturadas por um par de câmeras. O sistema realiza a tarefa utilizando
+\textit{webcams} simples e não exige um ambiente controlado, marcadores no
+usuário ou mesmo uso de iluminação especial. Para se ter uma ideia da robustez
+dos resultados, o sistema foi testado com sucesso em ambientes como uma sala de
+escritório e até mesmo a sala de estar de um dos autores.
+
+Os movimentos independentemente transferidos incluem: sorrir, abrir a boca,
+fechar os olhos e levantar as sobrancelhas. A técnica chave utilizada foi
+conectar características de um conjunto de pontos obtidos de um processo de
+rastreamento visual com os pesos de mistura da técnica de Mistura de Poses,
+permitindo gerar expressões variadas para o avatar a partir da combinação de um
+conjunto reduzido de expressões chave. 
 
 Para o rastreamento visual, utilizou-se a biblioteca FaceAnalysis SDK para
 capturar 66 pontos chaves do rosto humano em uma sequência de imagens. Já para
 gerar os pesos de mistura, foi utilizada uma regra simples baseada na razão
 entre distâncias de pontos nomeados. Com o objetivo de tornar o processo robusto
-à distância do usuário ao par de câmeras, se utilizou a estimação de
-tridimensionalidade para tornar os pesos de mistura em uma função das distâncias
-reais entre os pontos e não de distâncias em pixeis das câmeras. Para isso, foi
-preciso uma etapa prévia de calibração das câmeras utilizadas. Além disso, os
-pesos de mistura passam por um filtro digital que suaviza os resultados. Dois
-tipos de filtros foram utilizados: um filtro de de média móvel de Hanning de
-comprimento três e um conjunto de filtros projetados pela técnica de corte de
-janela.  Apesar de muito menos elaborado, o primeiro filtro apresentou melhores
-resultados que os últimos. Entende-se que o ruído presente no sinal não possui
-comportamento espectral que justifique um projeto cuidadoso de um filtro
-passa-baixas. Um filtro curto, que ainda assim atenue frequências altas,
-performa melhor por impor um atraso menor no sinal de saída.
+à distância do usuário ao par de câmeras, se utilizou estimação de
+tridimensionalidade para tornar os pesos de mistura uma função das distâncias
+reais entre os pontos e não das distâncias em pixeis das câmeras. Para isso, foi
+preciso uma etapa prévia de calibração das câmeras utilizadas.
 
-Uma série de experimentos foram realizados com o objetivo de medir a confiança
+Além disso, com o intuito de suavizar os resultados ao eliminar ruídos, os pesos
+de mistura passam por um filtro digital. Dois tipos de filtros foram utilizados:
+um filtro de de média móvel de Hanning de comprimento três e um conjunto de
+filtros projetados pela técnica de corte de janela.  Apesar de muito menos
+elaborado, o primeiro filtro apresentou melhores resultados que os últimos.
+Entende-se que o ruído presente no sinal não possui comportamento espectral que
+justifique um projeto cuidadoso de um filtro passa-baixas. Um filtro curto, que
+ainda assim atenue frequências altas, performa melhor por impor um atraso menor
+no sinal de saída.
+
+Uma série de experimentos foi realizada com o objetivo de medir a confiança
 em cada etapa do processo. A partir desses experimentos pôde-se inferir a
 distância que o usuário deve se posicionar do par de câmeras para que a técnica
 transfira os movimentos para o avatar de forma mais efetiva. Outro resultado foi
 que apesar de adequada para capturar o movimento da boca e das sobrancelhas, a
 regra associativa entre pontos e pesos de mistura não foi capaz de capturar
 outros movimentos faciais, como o movimento de bochechas e o piscar dos olhos.
-Em parte isso se deve a certa rigidez do algoritmo de rastreamento utilizado
+Isso se deve, em parte, à certa rigidez do algoritmo de rastreamento utilizado
 quanto ao formato do rosto, o que impede que este seja aplicado, pelo menos
 diretamente, para capturar nuâncias de certas expressões. Com isso, algumas das
 poses chave disponíveis não foram utilizadas na aplicação final.
@@ -44,9 +53,9 @@ desenvolvido foi capaz de sincronizar a abertura e o fechamento da boca do
 avatar enquanto o usuário conversava com a câmera em um dos vídeos de teste.
 Além disso, quando executando em máquinas comuns e ligado diretamente nas
 câmeras, o programa mostra os resultados em tempo de execução sem atraso
-perceptível entre entrada e saída. Por rodar em máquinas ordinárias e não exigir
-longas horas de processamento, a metodologia proposta se confirma como uma de
-baixo custo.
+perceptível entre entrada e saída. Por rodar em máquinas ordinárias, não exigir
+longas horas de processamento e não exigir controle especial do ambiente de
+filmagem a metodologia proposta se confirma como uma de baixo custo.
 
 
 
